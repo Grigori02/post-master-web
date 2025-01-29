@@ -2,10 +2,8 @@ import axios from 'axios';
 
 export const getPosts = () => async(dispatch, getState) => {
     try {
-      console.log('poxos')
-      console.log(111, getState())
       const token = getState().user.token || localStorage.getItem('token');
-      const response = await axios.get('http://localhost:5001/api/posts', 
+      const response = await axios.get(`${import.meta.env.REACT_APP_BACKEND_BASEURL}/api/posts`, 
          {
           headers: {
            Authorization: `Bearer ${token}`,
@@ -25,7 +23,7 @@ export const getPosts = () => async(dispatch, getState) => {
 export const getPost = (postId) => async(dispatch, getState) => {
   try {
     const token = getState().user.token || localStorage.getItem('token');
-    const response = await axios.get(`http://localhost:5001/api/posts/${postId}`, 
+    const response = await axios.get(`${import.meta.env.REACT_APP_BACKEND_BASEURL}/api/posts/${postId}`, 
        {
         headers: {
          Authorization: `Bearer ${token}`,
@@ -47,7 +45,7 @@ export const upsertPost = (postData) => async (dispatch, getState) => {
     const token = getState().user.token || localStorage.getItem('token');
     const response = await axios({
       method:"POST",
-      url: "http://localhost:5001/api/posts",
+      url: `${import.meta.env.REACT_APP_BACKEND_BASEURL}/api/posts`,
       data: JSON.stringify({
         base64: postData.media,
         text: postData.text,
@@ -60,7 +58,6 @@ export const upsertPost = (postData) => async (dispatch, getState) => {
 
     });
 
-    console.log('response.data', response.data)
     dispatch({
       type: "UPSERT_POST",
       payload: response.data,
@@ -73,7 +70,7 @@ export const upsertPost = (postData) => async (dispatch, getState) => {
 export const deletePost = (postId) => async(dispatch, getState) => {
   try {
     const token = getState().user.token || localStorage.getItem('token');
-     await axios.delete(`http://localhost:5001/api/posts/${postId}`, 
+     await axios.delete(`${import.meta.env.REACT_APP_BACKEND_BASEURL}/api/posts/${postId}`, 
        {
         headers: {
          Authorization: `Bearer ${token}`,

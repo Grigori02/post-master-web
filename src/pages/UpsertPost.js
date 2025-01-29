@@ -21,7 +21,6 @@ const UpsertPost = () => {
 
 
   useEffect(() => {
-    console.log(11, postId)
       if (!postId) {
        return;
       }
