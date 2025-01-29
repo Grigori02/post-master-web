@@ -3,7 +3,7 @@ import axios from 'axios';
 export const getPosts = () => async(dispatch, getState) => {
     try {
       const token = getState().user.token || localStorage.getItem('token');
-      const response = await axios.get(`${import.meta.env.REACT_APP_BACKEND_BASEURL}/api/posts`, 
+      const response = await axios.get(`http://localhost:5001/api/posts`, 
          {
           headers: {
            Authorization: `Bearer ${token}`,
@@ -23,7 +23,7 @@ export const getPosts = () => async(dispatch, getState) => {
 export const getPost = (postId) => async(dispatch, getState) => {
   try {
     const token = getState().user.token || localStorage.getItem('token');
-    const response = await axios.get(`${import.meta.env.REACT_APP_BACKEND_BASEURL}/api/posts/${postId}`, 
+    const response = await axios.get(`http://localhost:5001/api/posts/${postId}`, 
        {
         headers: {
          Authorization: `Bearer ${token}`,
@@ -45,7 +45,7 @@ export const upsertPost = (postData) => async (dispatch, getState) => {
     const token = getState().user.token || localStorage.getItem('token');
     const response = await axios({
       method:"POST",
-      url: `${import.meta.env.REACT_APP_BACKEND_BASEURL}/api/posts`,
+      url: `http://localhost:5001/api/posts`,
       data: JSON.stringify({
         base64: postData.media,
         text: postData.text,
@@ -70,7 +70,7 @@ export const upsertPost = (postData) => async (dispatch, getState) => {
 export const deletePost = (postId) => async(dispatch, getState) => {
   try {
     const token = getState().user.token || localStorage.getItem('token');
-     await axios.delete(`${import.meta.env.REACT_APP_BACKEND_BASEURL}/api/posts/${postId}`, 
+     await axios.delete(`http://localhost:5001/api/posts/${postId}`, 
        {
         headers: {
          Authorization: `Bearer ${token}`,
